@@ -8,7 +8,8 @@
     "startup_mode": "auto",
     "display_mode": "tab",
     "redirect_mode": "custom",
+    "user_data_access": false,
     "network_ports": {
-        "WEB_UI": 4202
+        "WEB_UI": 7777
     }
 }

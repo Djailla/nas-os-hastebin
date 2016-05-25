@@ -4,22 +4,21 @@ mkdir -m 755 -p /opt/hastebin/
 
 install -m 755 /home/source/rc.local /etc
 
-# Add nodejs repo
-apt-get update
-apt-get install -y -q curl git
-curl -sL https://deb.nodesource.com/setup_5.x | bash -
-
 # Install nodejs components
-apt-get install -y -q nodejs npm hastebin
+apt-get update
+apt-get install -y -q curl
+if [ $RAINBOW_ARCHITECTURE = "x86_64" ]
+then
+    # Install nodejs components
+    curl -sL https://deb.nodesource.com/setup_5.x | bash -
+    apt-get install -y -q nodejs npm
+else
+    echo "ARM"
+fi
 
-# # Checkout sources in /tmp
-# cd /opt/linux_dash/
-# git clone https://github.com/afaqurk/linux-dash.git
-
-# # Checkout last tag
-# cd linux-dash
+apt-get install -y -q nodejs npm
 
 # # Install the component
-# npm install
+npm install haste-server
 
 exit 0
