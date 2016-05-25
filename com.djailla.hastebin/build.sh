@@ -13,10 +13,9 @@ then
     curl -sL https://deb.nodesource.com/setup_5.x | bash -
     apt-get install -y -q nodejs npm
 else
-    echo "ARM"
+	curl -O  http://node-arm.herokuapp.com/node_latest_armhf.deb
+	dpkg -i node_latest_armhf.deb
 fi
-
-apt-get install -y -q nodejs npm
 
 # # Install the component
 npm install haste-server
