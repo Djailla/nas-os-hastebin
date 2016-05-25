@@ -1,0 +1,30 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+
+PIDFILE=/opt/hastebin/pid
+
+sed -i "s/\"port\":[0-9]*/\"port\":$RAINBOW_PORT_WEB_UI/" /opt/hastebin/.config
+
+case $1 in
+	start)
+
+		# Set the correct port information
+		lineNo=9
+		var="server.listen($RAINBOW_PORT_WEB_UI)"
+		sed -i "${lineNo}s/.*/$var/" /opt/hastebin/linux-dash/server/index.js
+
+		start-stop-daemon --start \
+											--make-pidfile \
+											--pidfile $PIDFILE \
+											--background \
+											--chdir /opt/hastebin/linux-dash/ \
+											--exec /usr/bin/node \
+											-- server/
+		;;
+	stop)
+		start-stop-daemon --stop --pidfile $PIDFILE
+		rm $PIDFILE
+		;;
+esac
