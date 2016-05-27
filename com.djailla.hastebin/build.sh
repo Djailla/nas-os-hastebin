@@ -1,7 +1,6 @@
 #!/bin/bash
 
 mkdir -m 755 -p /opt/hastebin/
-
 install -m 755 /home/source/rc.local /etc
 
 # Install nodejs components
@@ -17,7 +16,11 @@ else
 	dpkg -i node_latest_armhf.deb
 fi
 
-# # Install the component
+# Install the component
 npm install haste-server
+
+# Cleanup env
+apt-get remove -y -q curl
+apt-get clean
 
 exit 0
