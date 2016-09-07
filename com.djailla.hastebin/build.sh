@@ -9,11 +9,11 @@ apt-get install -y -q curl
 if [ $RAINBOW_ARCHITECTURE = "x86_64" ]
 then
     # Install nodejs components
-    curl -sL https://deb.nodesource.com/setup_5.x | bash -
+    curl -sL https://deb.nodesource.com/setup_6.x | bash -
     apt-get install -y -q nodejs npm
 else
-	curl -O  http://node-arm.herokuapp.com/node_latest_armhf.deb
-	dpkg -i node_latest_armhf.deb
+    echo "No ARM compatible version"
+    exit 1
 fi
 
 # Install the component
